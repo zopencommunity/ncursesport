@@ -1,0 +1,3 @@
+ncurses
+
+terminal emulation
