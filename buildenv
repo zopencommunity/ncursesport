@@ -4,6 +4,7 @@ export ZOPEN_TARBALL_URL="https://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.3.tar.gz
 export ZOPEN_TARBALL_DEPS="curl make gzip tar gawk"
 export ZOPEN_TYPE="TARBALL"
 export ZOPEN_MAKE_MINIMAL="yes"
+export ZOPEN_CHECK="${ZOPEN_ROOT}/test.sh"
 
 zopen_check_results()
 {
@@ -11,13 +12,10 @@ zopen_check_results()
   pfx="$2"
   chk="$1/$2_check.log"
 
+  grep -q "$ZOPEN_INSTALL_PREFIX/share/terminfo" ${chk}
+  failures=$?
   # Echo the following information to guage build health
-  echo "actualFailures:0"
+  echo "actualFailures:$failures"
   echo "totalTests:1"
   echo "expectedFailures:0"
-}
-
-zopen_append_to_env()
-{
-  # echo envars outside of PATH, MANPATH, LIBPATH
 }
