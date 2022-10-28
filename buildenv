@@ -12,10 +12,20 @@ zopen_check_results()
   pfx="$2"
   chk="$1/$2_check.log"
 
-  grep -q "$ZOPEN_INSTALL_PREFIX/share/terminfo" ${chk}
+  grep -q "$ZOPEN_INSTALL_DIR/share/terminfo" ${chk}
   failures=$?
   # Echo the following information to guage build health
   echo "actualFailures:$failures"
   echo "totalTests:1"
   echo "expectedFailures:0"
+}
+
+zopen_append_to_env()
+{
+cat <<ZZ
+export ZOPEN_EXTRA_CFLAGS="\${ZOPEN_EXTRA_CFLAGS} -I\$PWD/include"
+export ZOPEN_EXTRA_CXXFLAGS="\${ZOPEN_EXTRA_CXXFLAGS} -I\$PWD/include"
+export ZOPEN_EXTRA_LDFLAGS="\${ZOPEN_EXTRA_LDFLAGS} -L\$PWD/lib"
+export ZOPEN_EXTRA_LIBS="\${ZOPEN_EXTRA_LIBS} -lncurses"
+ZZ
 }
