@@ -12,7 +12,7 @@ zopen_check_results()
   pfx="$2"
   chk="$1/$2_check.log"
 
-  grep -q "$ZOPEN_INSTALL_DIR/share/terminfo" ${chk}
+  grep -q "ncurses 6" ${chk}
   failures=$?
   # Echo the following information to guage build health
   echo "actualFailures:$failures"

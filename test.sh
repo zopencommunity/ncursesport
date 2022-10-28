@@ -1,1 +1,1 @@
-./progs/infocmp -D
+./progs/infocmp -V
