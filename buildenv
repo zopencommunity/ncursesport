@@ -23,6 +23,7 @@ zopen_check_results()
 zopen_append_to_env()
 {
 cat <<ZZ
+export TERMINFO="\$PWD/share/terminfo/"
 export ZOPEN_EXTRA_CFLAGS="\${ZOPEN_EXTRA_CFLAGS} -I\$PWD/include"
 export ZOPEN_EXTRA_CXXFLAGS="\${ZOPEN_EXTRA_CXXFLAGS} -I\$PWD/include"
 export ZOPEN_EXTRA_LDFLAGS="\${ZOPEN_EXTRA_LDFLAGS} -L\$PWD/lib"
