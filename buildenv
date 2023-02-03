@@ -33,3 +33,7 @@ if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
 fi
 ZZ
 }
+
+zopen_get_version() {
+  cat VERSION | head -1 | awk -F" " '{print $2}'
+}
