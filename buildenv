@@ -1,7 +1,7 @@
 export ZOPEN_GIT_URL="https://github.com/mirror/ncurses.git"
 export ZOPEN_GIT_DEPS="git curl make gawk"
 export ZOPEN_TARBALL_URL="https://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.3.tar.gz"
-export ZOPEN_TARBALL_DEPS="curl make gzip tar gawk"
+export ZOPEN_TARBALL_DEPS="curl make gzip tar gawk sed coreutils"
 export ZOPEN_TYPE="TARBALL"
 export ZOPEN_MAKE_MINIMAL="yes"
 export ZOPEN_CHECK="${ZOPEN_ROOT}/test.sh"
@@ -24,7 +24,7 @@ zopen_append_to_env()
 {
 cat <<ZZ
 export TERM=xterm
-export TERMINFO="\$PWD/share/terminfo/"
+export ASCII_TERMINFO="\$PWD/share/terminfo/"
 if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
   export ZOPEN_EXTRA_CFLAGS="\${ZOPEN_EXTRA_CFLAGS} -I\$PWD/include"
   export ZOPEN_EXTRA_CXXFLAGS="\${ZOPEN_EXTRA_CXXFLAGS} -I\$PWD/include"
