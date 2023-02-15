@@ -6,6 +6,12 @@ export ZOPEN_TYPE="TARBALL"
 export ZOPEN_MAKE_MINIMAL="yes"
 export ZOPEN_CHECK="${ZOPEN_ROOT}/test.sh"
 
+zopen_init()
+{
+  # tic outputs to the location specified by TERMINFO, we don't want that
+  unset TERMINFO
+}
+
 zopen_check_results()
 {
   dir="$1"
