@@ -29,7 +29,11 @@ zopen_check_results()
 zopen_append_to_env()
 {
 cat <<ZZ
-export TERM=xterm
+if [ "\${_BPX_TERMPATH-x}" = "OMVS" ]; then
+  export TERM=dumb
+else
+  export TERM=xterm
+fi
 export ASCII_TERMINFO="\$PWD/share/terminfo/"
 if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
   export ZOPEN_EXTRA_CFLAGS="\${ZOPEN_EXTRA_CFLAGS} -I\$PWD/include"
