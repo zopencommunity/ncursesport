@@ -1,5 +1,5 @@
 # bump: ncurses-version /NCURSES_VERSION="(.*)"/ https://github.com/mirror/ncurses.git|semver:*
-NCURSES_VERSION="6.3"
+NCURSES_VERSION="6.4"
 
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_DEV_URL="https://github.com/mirror/ncurses.git"
