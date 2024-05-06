@@ -29,18 +29,20 @@ index f072668..2907f11 100644
  	    (void) cache_getenv("HOME", dbdHome);
  	    values[dbdEnvList] = cache_getenv("TERMINFO_DIRS", dbdEnvList);
 diff --git a/ncurses/tinfo/write_entry.c b/ncurses/tinfo/write_entry.c
-index cab4757..7084670 100644
+index 8ccca9e..1c0d55b 100644
 --- a/ncurses/tinfo/write_entry.c
 +++ b/ncurses/tinfo/write_entry.c
-@@ -220,7 +220,11 @@ _nc_set_writedir(const char *dir)
- 	&& use_terminfo_vars()
- #endif
- 	)
+@@ -224,8 +224,11 @@ _nc_set_writedir(const char *dir)
+     char actual[PATH_MAX];
+     bool specific = (dir != NULL);
+ 
+-    if (!specific && use_terminfo_vars())
+-	dir = getenv("TERMINFO");
 +#ifdef __MVS__
 +	dir = getenv("ASCII_TERMINFO");
 +#else
- 	dir = getenv("TERMINFO");
++ 	dir = getenv("TERMINFO");
 +#endif
  
-     if (dir != 0)
+     if (dir != NULL)
  	(void) _nc_tic_dir(dir);
