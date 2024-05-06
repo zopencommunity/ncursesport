@@ -1,5 +1,5 @@
 # bump: ncurses-version /NCURSES_VERSION="(.*)"/ https://github.com/mirror/ncurses.git|semver:*
-NCURSES_VERSION="6.4"
+NCURSES_VERSION="6.5"
 
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_DEV_URL="https://github.com/mirror/ncurses.git"
@@ -41,7 +41,7 @@ fi
 export ASCII_TERMINFO="\$PWD/share/terminfo/"
 if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
   export ZOPEN_EXTRA_CFLAGS="\${ZOPEN_EXTRA_CFLAGS} -I\$PWD/include"
-  export ZOPEN_EXTRA_CXXFLAGS="\${ZOPEN_EXTRA_CXXFLAGS} -I\$PWD/include"
+  export ZOPEN_EXTRA_CXXFLAGS="\${ZOPEN_EXTRA_CXXFLAGS} -I\$PWD/include -I\$PWD/include/ncurses"
   export ZOPEN_EXTRA_LDFLAGS="\${ZOPEN_EXTRA_LDFLAGS} -L\$PWD/lib"
   export ZOPEN_EXTRA_LIBS="\${ZOPEN_EXTRA_LIBS} -lncurses"
 fi
