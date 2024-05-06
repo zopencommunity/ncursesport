@@ -14,6 +14,7 @@ zopen_init()
 {
   # tic outputs to the location specified by TERMINFO, we don't want that
   unset TERMINFO
+  unset ASCII_TERMINFO
 }
 
 zopen_check_results()
