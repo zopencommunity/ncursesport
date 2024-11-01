@@ -50,6 +50,38 @@ fi
 ZZ
 }
 
+zopen_post_install() 
+{
+  mkdir $ZOPEN_INSTALL_DIR/altbin
+  mkdir -p $ZOPEN_INSTALL_DIR/share/altman/man1
+
+  # Add g prefix to all collding tools and manpages in bin/ and create symlinks
+set -x
+  find $ZOPEN_INSTALL_DIR/bin -type f -exec sh -c '
+  for file; do
+    dir=$(dirname "$file")
+    base=$(basename "$file")
+    if [ -f "/bin/$base" ]; then
+      mv "$file" "$dir/g$base"
+      ln -s "../bin/g$base" "$ZOPEN_INSTALL_DIR/altbin/$base"
+
+      mv "$ZOPEN_INSTALL_DIR/share/man/man1/$base.1"  "$ZOPEN_INSTALL_DIR/share/man/man1/g$base.1"
+      ln -s "../../man/man1/g$base.1" "$ZOPEN_INSTALL_DIR/share/altman/man1/$base.1"
+    fi
+  done
+' sh {} + \;
+
+}
+
+zopen_install_caveats()
+{
+cat <<ZZ
+GNU ncurses tools have been installed with the prefix "g" under bin/ to avoid collision with z/OS /bin/ tools.
+The conflicting manpages have been installed under the share/altman dir. You can use zotman to view them.
+If you prefer to use the ncurses tools as is, source zopen-config with the option --override-zos-tools.
+ZZ
+}
+
 zopen_get_version() {
   cat VERSION | head -1 | awk -F" " '{print $2}'
 }
