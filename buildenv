@@ -38,7 +38,7 @@ cat <<ZZ
 if [ "\${_BPX_TERMPATH-x}" = "OMVS" ]; then
   export TERM=dumb
 else
-  export TERM=xterm
+  export TERM=xterm-256color
 fi
 export ASCII_TERMINFO="\$PWD/share/terminfo/"
 if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
