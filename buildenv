@@ -10,6 +10,7 @@ export ZOPEN_STABLE_DEPS="curl make gzip tar gawk sed coreutils zoslib"
 export ZOPEN_MAKE_MINIMAL="yes"
 export ZOPEN_CHECK="${ZOPEN_ROOT}/test.sh"
 export ZOPEN_EXTRA_CONFIGURE_OPTS="--with-normal --disable-widec"
+export ZOPEN_COMP=CLANG
 
 zopen_init()
 {
@@ -56,7 +57,6 @@ zopen_post_install()
   mkdir -p $ZOPEN_INSTALL_DIR/share/altman/man1
 
   # Add g prefix to all collding tools and manpages in bin/ and create symlinks
-set -x
   find $ZOPEN_INSTALL_DIR/bin -type f -exec sh -c '
   for file; do
     dir=$(dirname "$file")
