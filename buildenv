@@ -82,6 +82,12 @@ If you prefer to use the ncurses tools as is, source zopen-config with the optio
 ZZ
 }
 
+zopen_append_to_zoslib_env() {
+cat <<EOF
+ASCII_TERMINFO|set|PROJECT_ROOT/share/terminfo/
+EOF
+}
+
 zopen_get_version() {
   cat VERSION | head -1 | awk -F" " '{print $2}'
 }
