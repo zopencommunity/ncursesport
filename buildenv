@@ -12,6 +12,9 @@ export ZOPEN_CHECK="${ZOPEN_ROOT}/test.sh"
 export ZOPEN_EXTRA_CONFIGURE_OPTS="--with-normal --disable-widec"
 export ZOPEN_COMP=CLANG
 
+export ZOPEN_EXTRA_CFLAGS="-mzos-target=zosv2r5 -march=z13"
+export ZOPEN_SYSTEM_PREREQS="zos25"
+
 zopen_init()
 {
   # tic outputs to the location specified by TERMINFO, we don't want that
