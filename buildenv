@@ -5,11 +5,11 @@ export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_DEV_URL="https://github.com/mirror/ncurses.git"
 export ZOPEN_DEV_DEPS="git curl make gawk"
 export ZOPEN_STABLE_URL="https://ftp.gnu.org/pub/gnu/ncurses/ncurses-${NCURSES_VERSION}.tar.gz"
-export ZOPEN_STABLE_DEPS="curl make gzip tar gawk sed coreutils zoslib"
+export ZOPEN_STABLE_DEPS="curl make gzip tar gawk sed coreutils zoslib pkgconfig"
 
 export ZOPEN_MAKE_MINIMAL="yes"
 export ZOPEN_CHECK="${ZOPEN_ROOT}/test.sh"
-export ZOPEN_EXTRA_CONFIGURE_OPTS="--with-normal --disable-widec"
+export ZOPEN_EXTRA_CONFIGURE_OPTS="--with-normal --disable-widec --enable-pc-files --with-pkg-config-libdir=\${ZOPEN_INSTALL_DIR}/lib/pkgconfig"
 export ZOPEN_COMP=CLANG
 
 export ZOPEN_EXTRA_CFLAGS="-mzos-target=zosv2r5 -march=z13"
@@ -50,6 +50,7 @@ if [ ! -z "\$ZOPEN_IN_ZOPEN_BUILD" ]; then
   export ZOPEN_EXTRA_CXXFLAGS="\${ZOPEN_EXTRA_CXXFLAGS} -I\$PWD/include -I\$PWD/include/ncurses"
   export ZOPEN_EXTRA_LDFLAGS="\${ZOPEN_EXTRA_LDFLAGS} -L\$PWD/lib"
   export ZOPEN_EXTRA_LIBS="\${ZOPEN_EXTRA_LIBS} -lncurses"
+  export PKG_CONFIG_PATH="\$PWD/lib/pkgconfig:\${PKG_CONFIG_PATH}"
 fi
 ZZ
 }
