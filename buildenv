@@ -9,7 +9,7 @@ export ZOPEN_STABLE_DEPS="curl make gzip tar gawk sed coreutils zoslib pkgconfig
 
 export ZOPEN_MAKE_MINIMAL="yes"
 export ZOPEN_CHECK="${ZOPEN_ROOT}/test.sh"
-export ZOPEN_EXTRA_CONFIGURE_OPTS="--with-normal --disable-widec --enable-pc-files --with-pkg-config-libdir=\${ZOPEN_INSTALL_DIR}/lib/pkgconfig"
+export ZOPEN_EXTRA_CONFIGURE_OPTS="--with-normal --enable-widec --enable-pc-files --with-pkg-config-libdir=\${ZOPEN_INSTALL_DIR}/lib/pkgconfig"
 export ZOPEN_COMP=CLANG
 
 export ZOPEN_EXTRA_CFLAGS="-mzos-target=zosv2r5 -march=z13"
@@ -63,4 +63,46 @@ EOF
 
 zopen_get_version() {
   cat VERSION | head -1 | awk -F" " '{print $2}'
+}
+
+zopen_post_install() 
+{
+  prefix=$1
+
+  lib="$prefix/lib"
+  pc="$lib/pkgconfig"
+  include="$prefix/include"
+  bin="$prefix/bin"
+
+  saved_pwd=$(pwd)
+
+  if [ -d "$lib" ]; then
+    cd "$lib" || return 1
+    for name in form menu ncurses panel "ncurses++"; do
+      ln -sf "lib${name}w.a"   "lib${name}.a"
+      ln -sf "lib${name}w_g.a" "lib${name}_g.a"
+    done
+    ln -sf "libncursesw.a" "libcurses.a"
+  fi
+
+  if [ -d "$pc" ]; then
+    cd "$pc" || return 1
+    ln -sf "ncursesw.pc" "ncurses.pc"
+    ln -sf "formw.pc"    "form.pc"
+    ln -sf "menuw.pc"    "menu.pc"
+    ln -sf "panelw.pc"   "panel.pc"
+    ln -sf "ncurses++w.pc"   "ncurses++.pc"
+  fi
+
+  if [ -d "$bin" ]; then
+    cd "$bin" || return 1
+    ln -sf "ncursesw6-config" "ncurses6-config"
+  fi
+
+  if [ -d "$include" ]; then
+    cd "$include" || return 1
+    ln -sf "ncursesw" "ncurses"
+  fi
+
+  cd "$saved_pwd" || true
 }
