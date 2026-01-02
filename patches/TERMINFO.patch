@@ -1,8 +1,8 @@
 diff --git a/ncurses/tinfo/db_iterator.c b/ncurses/tinfo/db_iterator.c
-index f072668..2907f11 100644
+index f757691..2180ae3 100644
 --- a/ncurses/tinfo/db_iterator.c
 +++ b/ncurses/tinfo/db_iterator.c
-@@ -217,7 +217,13 @@ _nc_tic_dir(const char *path)
+@@ -225,7 +225,13 @@ _nc_tic_dir(const char *path)
  	} else if (HaveTicDirectory == 0) {
  	    if (use_terminfo_vars()) {
  		const char *envp;
@@ -11,12 +11,12 @@ index f072668..2907f11 100644
 +		    return _nc_tic_dir(envp);
 +		if ((envp = getenv("TERMINFO")) != 0)
 +#else
- 		if ((envp = getenv("TERMINFO")) != 0)
+ 		if ((envp = getenv("TERMINFO")) != NULL)
 +#endif
  		    return _nc_tic_dir(envp);
  	    }
  	}
-@@ -318,7 +324,11 @@ _nc_first_db(DBDIRS * state, int *offset)
+@@ -326,7 +332,11 @@ _nc_first_db(DBDIRS * state, int *offset)
  
  	if (use_terminfo_vars()) {
  #if NCURSES_USE_DATABASE
@@ -29,10 +29,10 @@ index f072668..2907f11 100644
  	    (void) cache_getenv("HOME", dbdHome);
  	    values[dbdEnvList] = cache_getenv("TERMINFO_DIRS", dbdEnvList);
 diff --git a/ncurses/tinfo/write_entry.c b/ncurses/tinfo/write_entry.c
-index 8ccca9e..1c0d55b 100644
+index eddae7f..c8fae41 100644
 --- a/ncurses/tinfo/write_entry.c
 +++ b/ncurses/tinfo/write_entry.c
-@@ -224,8 +224,11 @@ _nc_set_writedir(const char *dir)
+@@ -239,8 +239,11 @@ _nc_set_writedir(const char *dir)
      char actual[PATH_MAX];
      bool specific = (dir != NULL);
  

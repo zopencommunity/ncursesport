@@ -1,8 +1,8 @@
 diff --git a/progs/clear.c b/progs/clear.c
-index 97cb0f3..6a84120 100644
+index e0de8ce..705a0ee 100644
 --- a/progs/clear.c
 +++ b/progs/clear.c
-@@ -41,6 +41,37 @@
+@@ -41,6 +41,36 @@
  #include <clear_cmd.h>
  #include <tty_settings.h>
  
@@ -36,23 +36,17 @@ index 97cb0f3..6a84120 100644
 +}
 +#endif
 +
-+
- MODULE_ID("$Id: clear.c,v 1.24 2021/03/20 18:23:14 tom Exp $")
+ MODULE_ID("$Id: clear.c,v 1.25 2024/10/19 22:00:53 tom Exp $")
  
  const char *_nc_progname = "clear";
-@@ -72,11 +103,20 @@ main(
-     int fd;
-     int c;
-     char *term;
-+    char *omvs;
-     bool opt_x = FALSE;		/* clear scrollback if possible */
- 
+@@ -77,6 +107,15 @@ main(
      _nc_progname = _nc_rootname(argv[0]);
      term = getenv("TERM");
  
 +#ifdef __MVS__
++    char *omvs;
 +    omvs = getenv("_BPX_TERMPATH");
-+    if (strcmp(omvs, "OMVS") == 0) {
++    if (omvs != NULL && strcmp(omvs, "OMVS") == 0) {
 +      do_mvs_clear(argc, argv);
 +      exit(0);
 +    }
