@@ -1,0 +1,16 @@
+diff --git i/configure w/configure
+index 48ad381..b05bd53 100755
+--- i/configure
++++ w/configure
+@@ -10250,6 +10250,11 @@ else
+ 		test -s conftest.tmp && cf_cv_multiuser=yes
+ 		rm -f conftest.tmp
+ 	fi
++	if test "$cf_cv_multiuser" = no; then
++		case $host_os in
++		(*openedition*) cf_cv_multiuser=yes ;;
++		esac
++	fi
+ 
+ fi
+ echo "$as_me:10255: result: $cf_cv_multiuser" >&5
