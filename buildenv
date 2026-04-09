@@ -5,7 +5,7 @@ export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_DEV_URL="https://github.com/mirror/ncurses.git"
 export ZOPEN_DEV_DEPS="git curl make gawk"
 export ZOPEN_STABLE_URL="https://ftp.gnu.org/pub/gnu/ncurses/ncurses-${NCURSES_VERSION}.tar.gz"
-export ZOPEN_STABLE_DEPS="curl make gzip tar gawk sed coreutils zoslib pkgconfig"
+export ZOPEN_STABLE_DEPS="make gawk sed coreutils pkgconfig"
 
 export ZOPEN_MAKE_MINIMAL="yes"
 export ZOPEN_CHECK="${ZOPEN_ROOT}/test.sh"
